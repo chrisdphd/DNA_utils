@@ -23,7 +23,7 @@ __status__ = "Development"
 from sys import argv
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-def add(x, y):
+def add(x,y):
     """Add Function"""
     return x + y
 
