@@ -1,14 +1,12 @@
-#! /Library/Frameworks/Python.framework/Versions/3.9/bin/python3
-#/usr/bin/python
-#/usr/env/bin python
-# file **filename**.py
-#from __future__ import division
+#!/usr/local/bin/python3
+
 
 """ description
-.. module:: **filename**.py
+.. module:: find_field_headers_YYYYMMDD.py
     :members:
     :platform: Unix, OS X
-    :synopsis: **synopsis here**
+    :synopsis: searches for header column names (-n), in an input datafile (-f or -c), and prints them out in the order in -n,
+    example:  cat ~/resource/keep_me_here.tmp1.tab | ./find_field_headers_20210506.py -c -n seq,id,tm_p3,tm_diff | less
 .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 
@@ -26,10 +24,6 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from os.path import exists, isfile
 import sys
 
-def add(x, y):
-    """Add Function"""
-    return x + y
-
 
 def workflow(verbose, fh, cols):
     """description of workflow
@@ -38,8 +32,6 @@ def workflow(verbose, fh, cols):
     :type <parameter name>: <parameter type>
     :returns: <what function returns>
     """
-    if verbose:
-        print("The addition function: ",(add(2,2)))
 
     listcount = -1
     for col in cols.split(','):
@@ -98,14 +90,14 @@ def parseCmdlineParams(arg_list=argv):
     # argparser.add_argument('--argument',help='help string')
     argparser.add_argument('-f', '--file', help='file to analyse. Format ID<tab>ACTGTGCATGC...etc, on 1 line.', type=str, required=False)
     argparser.add_argument('-c', '--stdin', help='(Flag) info on STDIN to analyse', action="store_true", required=False)
-    argparser.add_argument('-n', '--colnames', help='a csv of the column header NAMES to find, in the order desired for printout', type=str, required=False)
+    argparser.add_argument('-n', '--colnames', help='a csv string (on the command line) of the column header NAMES to find, in the order desired for printout', type=str, required=True)
 
     argparser.add_argument('-1', '--int1', help='Integer 1 in math function', default=3, type=int, required=False)
     argparser.add_argument('-2', '--int2', help='Integer 2 in math function', default=4, type=int, required=False)
     argparser.add_argument('-v', '--verbose', help='(Flag) verbose output for errror checking', action="store_true", required=False)
 
-
     return argparser.parse_args()
+
 
 def main(args,args_parsed=None):
 
@@ -116,7 +108,7 @@ def main(args,args_parsed=None):
     else:
         args = parseCmdlineParams(args)
 
-    fh = None
+
     if args.stdin:
         fh = sys.stdin
     elif args.file:   ### the mRNA file
@@ -139,13 +131,14 @@ def main(args,args_parsed=None):
     else:
         verbose = False
 
-    if args.colnames:
-        cols = (args.colnames)
-        if verbose:
-            print(cols)
+
+    cols = (args.colnames)
+    if verbose:
+        print(cols)
 
     #Call workflow for script after parsing command line parameters.
     workflow(verbose, fh, cols)
+
 
 if __name__ == "__main__":
     main(argv)
