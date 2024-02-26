@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
-# generates [a number] of randomers of [a fixed length] to run thru a filter (GC%, Tm, homopolymer check), and then output the desired number of filter-passing sequences, with properties
+# generates [a number of] randomers [of a fixed length] to run thru a filter (GC%, Tm, homopolymer check), and then output the desired number of filter-passing sequences, with properties
+# can also trim before determining Tm, and can add fixed-sequence prefix or suffix before property-testing and output
 
 import random
 import re
@@ -78,7 +79,7 @@ def workflow(num_candidates, num_required, oligo_len, trim_5, prefix_tail5, suff
 
 
 def parseArgs():
-    argparser = ArgumentParser(description='Creates RANDOMers and does some properties and filtering')
+    argparser = ArgumentParser(description='Creates RANDOMers and does some property-measurement and filtering')
     # the arguments:
     argparser.add_argument('-nc', '--num_candidates', help='Number of CANDIDATE randomers to create', type=int, required=True)
     argparser.add_argument('-nr', '--num_required', help='(up to) Number of PASSING-FILTERS randomers to create', type=int, required=False)
