@@ -1,14 +1,10 @@
-#!/Users/cdavie/miniconda3/bin/python3
-# /usr/bin/python
-#/usr/env/bin python
-# file **filename**.py
-#from __future__ import division
+#! /usr/local/bin/python3
 
 """ description
-.. module:: **filename**.py
+.. module:: **skeleton**.py
     :members:
-    :platform: Unix, OS X
-    :synopsis: **synopsis here**
+    :platform: linux, Unix, OS X
+    :synopsis: skeleton script with code to parse input file, plus do a tiny bit of math and write out to 2 output files
 .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 
@@ -24,7 +20,6 @@ __status__ = "Development"
 from sys import argv
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from os.path import exists, isfile
-import sys
 
 
 def workflow(verbose, fh, out1, out2):
@@ -42,10 +37,9 @@ def workflow(verbose, fh, out1, out2):
         l0 = line.split('\t')
         id = l0[0]
         print (id)
-        #print (tmp.isnumeric())
         if id.isnumeric():
             id = int(id)
-            print ("we got a number!\n")
+            print ("we got a number!")
             if (id % 2) == 0:  ### looking for remainder
                 print(id,"....even\n")
                 #print("{0} is Even".format(id))
@@ -55,7 +49,7 @@ def workflow(verbose, fh, out1, out2):
                 print(id, "....odd\n")
                 out2.write(line+"\n")
         else:
-            print ("Line not a numerical ID", line)
+            print ("WARNING: Line is not an integer. ID:", line, '\n')
 
 
 def parseCmdlineParams(arg_list=argv):
@@ -72,7 +66,7 @@ def parseCmdlineParams(arg_list=argv):
     # the arguments:
     #Script arguments.  Use:
     # argparser.add_argument('--argument',help='help string')
-    argparser.add_argument('-f', '--file', help='file to analyse. Format ID<tab>ACTGTGCATGC...etc, on 1 line.', type=str, required=False)
+    argparser.add_argument('-f', '--file', help='file to analyse. For this skeleton, a list of ints (odd and even), one per line', type=str, required=False)
     argparser.add_argument('-c', '--stdin', help='(Flag) info on STDIN to analyse', action="store_true", required=False)
 
     argparser.add_argument('-1', '--output1', help='1st output file', type=str, required=True)
@@ -91,10 +85,10 @@ def main(args,args_parsed=None):
     else:
         args = parseCmdlineParams(args)
 
-    fh = None
+
     if args.stdin:
         fh = sys.stdin
-    elif args.file:   ### the mRNA file
+    elif args.file:   ### the input file
         filename = args.file
         if not exists(filename):
             sys.stderr.write('ERROR: file {} does not exist'.format(filename))
@@ -114,10 +108,8 @@ def main(args,args_parsed=None):
     else:
         verbose = False
 
-    if args.output1:
-        out1 = open(args.output1, 'w+')
-    if args.output2:
-        out2 = open(args.output2, 'w+')
+    out1 = open(args.output1, 'w+')
+    out2 = open(args.output2, 'w+')
 
 
     #Call workflow for script after parsing command line parameters.
