@@ -1,5 +1,4 @@
-#!/usr/bin/python
-from __future__ import division
+#!/usr/local/bin/python3
 
 """ description
 .. module:: **filename**.py
@@ -23,6 +22,55 @@ from os.path import exists, isfile
 import sys
 import revcomp_utils_20210404
  
+
+def revcomp4(s):
+    """description of revcomp4
+
+    :param <parameter name>: <parameter description>
+    :type <parameter name>: <parameter type>
+    :returns:  returns reverse complemented DNA sequence, where input is strictly A,C,G,T
+    """
+    return ''.join([{'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}[B] for B in s][::-1])
+
+
+def workflow(subseq):
+    """workflow only activated in args.verbose mode. Uses a few utils in revcomp_utils, plus one local fuction and a lambda function.
+
+     :param <parameter name>: <parameter description>
+     :type <parameter name>: <parameter type>
+     :returns: <returns some hardwired revcomps as text output>
+     """
+    print ("")
+    print ("a few other ways, for the inline oligo:")
+    print (subseq)
+    print ("Its complement: ", (revcomp_utils_20210404.complement(subseq)))
+    print ("Its complement, reversed: ", (revcomp_utils_20210404.complement(subseq[::-1])))
+
+    print ("")
+    print ("revcomp3 of", subseq)
+    print (revcomp_utils_20210404.revcomp3(subseq))
+
+    print ("")
+    print ("local lambda, 1-liner")
+    reversecomplement = lambda i: ''.join([{'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}[B] for B in i][::-1])
+    print ("input:", subseq, "    revcomp:", reversecomplement(subseq))
+
+    print ("")
+    print ("lambda-derived function: (revcomp method 4, local)") # using local function, see above
+    print ("input:", subseq, "    revcomp:", revcomp4(subseq))
+
+    print ("")
+    print ("hardwired:")
+    print ("")
+    print ("revcomp5 of acgtCGGGGY (using maketrans)")
+    print (revcomp_utils_20210404.revcomp5("acgtCGGGGY"))
+
+    print ("")
+    print ("revcomp6 of ACTGAAAAAAA (using SEQ class)")
+    print (revcomp_utils_20210404.revcomp6("ACTGAAAAAAA"))
+
+
+
 def parseArgs():
     """Parses commandline arguments.
 
@@ -51,51 +99,6 @@ def parseArgs():
 
     return argparser.parse_args()
 
-def revcomp4(s):
-    """description of revcomp4
-
-    :param <parameter name>: <parameter description>
-    :type <parameter name>: <parameter type>
-    :returns:  returns reverse complemented DNA sequence, where input is strictly A,C,G,T
-    """
-    return ''.join([{'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}[B] for B in s][::-1])
-
-
-def workflow(subseq):
-    """workflow only activated in args.verbose mode. Uses a few utils in revcomp_utils, plus one local fuction and a lambda function.
-
-     :param <parameter name>: <parameter description>
-     :type <parameter name>: <parameter type>
-     :returns: <returns some hardwired revcomps as text output>
-     """
-    print ""
-    print "a few other ways, for the inline oligo:"
-    print subseq
-    print "Its complement: ", (revcomp_utils_20210404.complement(subseq))
-    print "Its complement, reversed: ", (revcomp_utils_20210404.complement(subseq[::-1]))
-
-    print ""
-    print "revcomp3 of", subseq
-    print(revcomp_utils_20210404.revcomp3(subseq))
-
-    print ""
-    print "local lambda, 1-liner"
-    reversecomplement = lambda i: ''.join([{'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}[B] for B in i][::-1])
-    print "input:", subseq, "    revcomp:", reversecomplement(subseq)
-
-    print ""
-    print "lambda-derived function: (revcomp method 4, local)" # using local function, see above
-    print "input:", subseq, "    revcomp:", revcomp4(subseq)
-
-    print ""
-    print "hardwired:"
-    print ""
-    print "revcomp5 of acgtCGGGGY (using maketrans)"
-    print (revcomp_utils_20210404.revcomp5("acgtCGGGGY"))
-
-    print ""
-    print "revcomp6 of ACTGAAAAAAA (using SEQ class)"
-    print revcomp_utils_20210404.revcomp6("ACTGAAAAAAA")
 
 
 if __name__ == '__main__':
@@ -103,23 +106,24 @@ if __name__ == '__main__':
 
     inline = args.pseq
     if inline:
-        print '=== Hello, a sequence is inline on the command line, using option -p', inline
-        print "revcomp:", (revcomp_utils_20210404.revcomp1(inline))   ### a single inline oligo, so no need for loop funct
-        print ""
+        print ('=== Hello, a sequence is inline on the command line, using option -p:', inline)
+        print ("revcomp:", (revcomp_utils_20210404.revcomp1(inline)))   ### a single inline oligo, so no need for loop funct
+        print ("")
 
     if args.stdin:
         if args.iterable:
-            print '=== Hello, a sequence is from STDIN  (...using iterable object). Key: <input_seq></t><revcomp>'
-            for line in revcomp_utils_20210404.revcomp2_iterable(sys.stdin):  ### sending object, looping thru output to print
+            print ('=== Hello, a sequence is from STDIN  (...using iterable object). Key: <input_seq></t><revcomp>')
+            ### sending object, looping thru output to print
+            for line in revcomp_utils_20210404.revcomp2_iterable(sys.stdin):
                 print ("\t".join(line))
-                print ""
+                print ("")
         else:
-            print '=== Hello, a sequence is on STDIN (...using non-iterable function)'
+            print ('=== Hello, a sequence is on STDIN (...using non-iterable function)')
             for line in sys.stdin:   ### sending 1 line at a time to funct, so no need for an iterator/loop funct
                 line = line.strip('\n')
-                print "STDIN", line
-                print "revcomp.......", (revcomp_utils_20210404.revcomp1(line))
-                print ""
+                print ("STDIN", line)
+                print ("revcomp.......", (revcomp_utils_20210404.revcomp1(line)))
+                print ("")
 
     if args.file:
         filename = args.file
@@ -132,31 +136,31 @@ if __name__ == '__main__':
         if args.iterable:
             try:
                 file_handle = open(filename, 'r')
-                print '=== Hello, a sequence is from file  (...using iterable object). Key: <input_seq></t><revcomp>'
+                print ('=== Hello, a sequence is from file  (...using iterable object). Key: <input_seq></t><revcomp>')
                 for line in revcomp_utils_20210404.revcomp2_iterable(file_handle):  ### sending object, looping thru output to print
                     print ("\t".join(line))
-                print ""
+                print ("")
             except Exception as e:
                 print('Exception occurred trying to reverse complement iterable file {}. Exception: {}'
                       .format(filename, e.message or e))
         elif args.iterable2:
             try:
                 file_handle = open(filename, 'r')
-                print '=== Whoa, a sequence is from FILE  (...and using iterable2 object). Key: <input_seq></t><revcomp>'
+                print ('=== Whoa, a sequence is from FILE  (...and using iterable2 object). Key: <input_seq></t><revcomp>')
                 for line in revcomp_utils_20210404.revcomp2_iterable2(file_handle):  ### sending object, looping thru output to print
                     print ("\t".join(line))
-                print ""
+                print ("")
             except Exception as e:
                 print('Exception occurred trying to reverse complement iterable file {}. Exception: {}'
                       .format(filename, e.message or e))
         else:
             try:
                 with open(filename, 'rb') as file_handle:
-                    print '=== Hello, a sequence is from file (...using non-iterable function)'
+                    print ('=== Hello, a sequence is from file (...using non-iterable function)')
                     for line in file_handle:   ### sending 1 line at a time to funct, so no need for an iterator/loop funct
                         line = line.strip('\n')
-                        print "input", line, "revcomp non-iterable:  ", (revcomp_utils_20210404.revcomp1(line))
-                    print ""
+                        print ("input", line, "revcomp non-iterable:  ", (revcomp_utils_20210404.revcomp1(line)))
+                    print ("")
             except Exception as e:
                 print('Exception occurred trying to loop thru file {}. Exception: {}'
                       .format(filename, e.message or e))

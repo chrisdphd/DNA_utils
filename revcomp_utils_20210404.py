@@ -1,7 +1,5 @@
-#!/usr/bin/python
-from __future__ import division
+#!/usr/local/bin/python3
 
-from string import maketrans
 from Bio.Seq import Seq
 
 """ description
@@ -21,11 +19,12 @@ __maintainer__ = "FirstName LastName"
 __email__ = "chrisdphd@gmail.com"
 __status__ = "Development"
 
+import re
 
 def revcomp1(dnaseq):
     dnaseq = list(dnaseq)
     nuc_count = len(dnaseq)
-    for index in xrange(nuc_count):
+    for index in range(nuc_count):
         if dnaseq[index] == 'a':
             dnaseq[index] = 't'
         elif dnaseq[index] == 'A':
@@ -53,7 +52,7 @@ def revcomp2_iterable(iterable):
         # print "the input, from iterable:", l0  # debug
         sequence = list(l0[0])
         nucleotide_count = len(sequence)
-        for index in xrange(nucleotide_count):
+        for index in range(nucleotide_count):
             if sequence[index] == 'a':
                 sequence[index] = 't'
             elif sequence[index] == 'A':
@@ -77,7 +76,7 @@ def revcomp2_iterable(iterable):
 def revcomp2_iterable2(iterable):
     for x in iterable:
         x = x.strip('\n')
-        y = x.translate(maketrans('ACGTacgtRYMKrymkVBHDvbhd', 'TGCAtgcaYRKMyrkmBVDHbvdh'))[::-1]
+        y = x.translate(str.maketrans('ACGTacgtRYMKrymkVBHDvbhd', 'TGCAtgcaYRKMyrkmBVDHbvdh'))[::-1]
         yield(x, y)
 
 
@@ -97,7 +96,7 @@ def revcomp4(s):
 
 
 def revcomp5(seq):  # full IUPAC
-    return seq.translate(maketrans('ACGTacgtRYMKrymkVBHDvbhd', 'TGCAtgcaYRKMyrkmBVDHbvdh'))[::-1]
+    return seq.translate(str.maketrans('ACGTacgtRYMKrymkVBHDvbhd', 'TGCAtgcaYRKMyrkmBVDHbvdh'))[::-1]
 
 
 def revcomp6(seq):
