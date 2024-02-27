@@ -40,6 +40,9 @@ def workflow(verbose, fh, cols):
         if verbose:
             print("from list", col, listcount)
 
+    # Write the output header:
+    print('\t'.join(cols.split(',')))
+
     col_dict = {}
 
     linecount=-1
