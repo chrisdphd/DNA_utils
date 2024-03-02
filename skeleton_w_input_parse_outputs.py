@@ -1,10 +1,10 @@
 #! /usr/local/bin/python3
 
 """ description
-.. module:: **skeleton**.py
+.. module:: skeleton_w_input_parse_outputs.py
     :members:
     :platform: linux, Unix, OS X
-    :synopsis: skeleton script with code to parse input file, plus do a tiny bit of math and write out to 2 output files
+    :synopsis: A simple script to use as a template to get started. Function to test odd vs even. WITH file I/O: reads from file, outputs to files.
 .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 

@@ -1,13 +1,11 @@
 #!/usr/local/bin/python3
 
-# file **filename**.py
-
 """ description
-.. module:: **filename**.py
+.. module:: skeleton_template_simple.py
     :members:
     :platform: Unix, OS X
-    :synopsis: **synopsis here**
-.. moduleauthor:: Author Name <chrisdphd@gmail.com>
+    :synopsis: A simple script to use as a template to get stated. Addition function. No file I/O
+    .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 
 __author__ = "Christopher Davies"

@@ -1,13 +1,10 @@
 #!/usr/local/bin/python3
 
-"""
-Module documentation.
-"""
 """ description
-.. module:: **filename**.py
+.. module:: pg_load_YYYYMMDD.py
     :members:
-    :platform: Unix, OS X
-    :synopsis: **synopsis here**
+    :platform: Linux, Unix, OS X
+    :synopsis: Load a tsv file into a postgres database table. OR, query a postgres database table for a given gene symbol. tsv = tab-delimited. Demo for psycopg2.
 .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 

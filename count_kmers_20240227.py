@@ -1,10 +1,10 @@
 #!/usr/local/bin/python3
 
 """ description
-.. module:: **skeleton**.py
+.. module:: count_kmers_YYYYMMDD.py
     :members:
     :platform: linux, Unix, OS X
-    :synopsis: skeleton script with code to parse input file, plus do a tiny bit of math and write out to 2 output files
+    :synopsis: Make a kmer frequency table for a piece of DNA (e.g a chromosome or a prokaryotic genome)
 .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 

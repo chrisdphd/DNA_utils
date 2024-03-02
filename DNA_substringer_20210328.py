@@ -1,11 +1,10 @@
 #!/usr/local/bin/python3
 
-# file DNA_substringer_YYYYMMDD.py
 """ description
-.. module:: DNA_substringer.py
+.. module:: DNA_substringer_YYYYMMDD.py
     :members:
     :platform: Linux, Unix, OS X
-    :synopsis: Enumerates a set of primers (substrings of the dna sequence),
+    :synopsis: Enumerates a set of primers (oligonucleotide substrings of a DNA sequence).....(demo version)
     (many per 3' end, so arguably not very useful, but OK as a demo)
     and filtered for percent GC, Tm and some homopolymers. DNA is input in format ID<tab>ACTGTGCATGC...etc, on 1 line.
     MUST specify --file OR --stdin for the target sequence, which is in the format: ID<tab>sequence (all on one line)

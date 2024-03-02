@@ -1,10 +1,10 @@
-#! /usr/local/bin/python3
+#!/usr/local/bin/python3
 
 """ description
 .. module:: count_occurrencces_YYYYMMDD.py
     :members:
     :platform: linux, Unix, OS X
-    :synopsis: count occcurences (i.e frequency count) of values in a field, and output only those above a certain value
+    :synopsis: Count occcurences (i.e frequency count) of values in a field, and output only those (key-vals) above a certain value
 .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 
