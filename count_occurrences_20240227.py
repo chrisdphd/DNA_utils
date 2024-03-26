@@ -5,6 +5,7 @@
     :members:
     :platform: linux, Unix, OS X
     :synopsis: Count occcurences (i.e frequency count) of values in a field, and output only those (key-vals) above a certain value
+    :example:  ./count_occurrences.20240227.py -f resource/keep_me_here.primers.1.tsv -t 3 | less
 .. moduleauthor:: Author Name <chrisdphd@gmail.com>
 """
 
@@ -67,7 +68,7 @@ def parseCmdlineParams(arg_list=argv):
     argparser.add_argument('-f', '--file', help='file to analyse. For this skeleton, a list of ints (odd and even), one per line', type=str, required=False)
     argparser.add_argument('-c', '--stdin', help='(Flag) info on STDIN to analyse', action="store_true", required=False)
     argparser.add_argument('-t', '--field', help='field/column (0-based) to analyse', type=int, required=True)
-    argparser.add_argument('-n', '--num_filter', help='frequency/ occurrence count below which to filter out', type=int, default=False, required=False)
+    argparser.add_argument('-n', '--num_filter', help='frequency/occurrence count below which to filter out', type=int, default=False, required=False)
     argparser.add_argument('-v', '--verbose', help='(Flag) verbose output for errror checking', action="store_true", required=False)
 
     return argparser.parse_args()
